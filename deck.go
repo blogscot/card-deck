@@ -1,44 +1,57 @@
-package main
+package deck
 
 import (
-	"fmt"
 	"math/rand"
 	"sort"
-	"strings"
 )
 
-func main() {
-	deck := New()
-	deck.Shuffle()
-	// for _, card := range deck {
-	// 	v := strings.Title((card.value).String())
-	// 	s := strings.Title((card.suit).String())
-	// 	fmt.Printf("%s of %s\n", v, s)
-	// }
-	// deck.BySuit()
-	// sort.Sort(BySuit(deck))
+// Suit defines a card's suit
+type Suit int
 
-	suit := func(c1, c2 *Card) bool {
-		return c1.suit < c2.suit
-	}
-	value := func(c1, c2 *Card) bool {
-		return c1.value < c2.value
-	}
+const (
+	spades Suit = iota
+	diamonds
+	clubs
+	hearts
+)
 
-	OrderedBy(suit, value).Sort(deck)
+// Value defines a card's value
+type Value int
 
-	for _, card := range deck {
-		v := strings.Title((card.value).String())
-		s := strings.Title((card.suit).String())
-		fmt.Printf("%s of %s\n", v, s)
-	}
+const (
+	ace Value = iota
+	two
+	three
+	four
+	five
+	six
+	seven
+	eight
+	nine
+	jack
+	queen
+	king
+)
+
+var (
+	suits  = []Suit{spades, diamonds, clubs, hearts}
+	values = []Value{ace, two, three, four, five, six, seven, eight, nine, jack, queen, king}
+)
+
+// Card is a card in a deck of cards
+type Card struct {
+	Suit  Suit
+	Value Value
 }
+
+// Deck defines a deck of cards
+type Deck []Card
 
 // New generates a deck of cards
 func New() (deck Deck) {
 	for _, s := range suits {
 		for _, v := range values {
-			deck = append(deck, Card{suit: s, value: v})
+			deck = append(deck, Card{Suit: s, Value: v})
 		}
 	}
 	return
