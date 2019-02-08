@@ -83,8 +83,19 @@ func OrderedBy(by ...By) *CardSorter {
 	}
 }
 
-// Sort performs sorting using the CardSorter.
-func (ms *CardSorter) Sort(deck Deck) {
+func bySuit(c1, c2 *Card) bool {
+	return c1.Suit < c2.Suit
+}
+func byValue(c1, c2 *Card) bool {
+	return c1.Value < c2.Value
+}
+
+// Sort sorts the deck of cards.
+func (d *Deck) Sort() {
+	OrderedBy(bySuit, byValue).sort(*d)
+}
+
+func (ms *CardSorter) sort(deck Deck) {
 	ms.deck = deck
 	sort.Sort(ms)
 }

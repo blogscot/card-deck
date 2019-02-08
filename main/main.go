@@ -10,15 +10,7 @@ import (
 func main() {
 	cards := deck.New()
 	cards.Shuffle()
-
-	suit := func(c1, c2 *deck.Card) bool {
-		return c1.Suit < c2.Suit
-	}
-	value := func(c1, c2 *deck.Card) bool {
-		return c1.Value < c2.Value
-	}
-
-	deck.OrderedBy(suit, value).Sort(cards)
+	cards.Sort()
 
 	for _, card := range cards {
 		v := strings.Title((card.Value).String())
