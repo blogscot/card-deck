@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"sort"
 	"strings"
+	"time"
 )
 
 // Suit defines a card's suit
@@ -40,6 +41,10 @@ var (
 	suits  = []Suit{spades, diamonds, clubs, hearts}
 	values = []Value{ace, two, three, four, five, six, seven, eight, nine, jack, queen, king}
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 // Card is a card in a deck of cards
 type Card struct {
