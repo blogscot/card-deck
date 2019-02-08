@@ -8,5 +8,5 @@ func main() {
 	cards := deck.New()
 	cards.Shuffle()
 	cards.Sort()
-	cards.Show()
+	deck.Show(cards)
 }

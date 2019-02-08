@@ -80,8 +80,8 @@ func (d *Deck) Sort() {
 }
 
 // Show prints the deck of cards.
-func (d Deck) Show() {
-	for _, card := range d {
+func Show(cards []Card) {
+	for _, card := range cards {
 		v := strings.Title((card.Value).String())
 		s := strings.Title((card.Suit).String())
 		fmt.Printf("%s of %s\n", v, s)
