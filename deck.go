@@ -1,9 +1,11 @@
-// Package deck provides a means to create, shuffle and sort a deck of cards.
+// Package deck provides a means to create, shuffle, sort, and show a deck of cards.
 package deck
 
 import (
+	"fmt"
 	"math/rand"
 	"sort"
+	"strings"
 )
 
 // Suit defines a card's suit
@@ -67,6 +69,20 @@ func (d *Deck) Shuffle() {
 	return
 }
 
+// Sort sorts the deck of cards.
+func (d *Deck) Sort() {
+	orderedBy(bySuit, byValue).sort(*d)
+}
+
+// Show prints the deck of cards.
+func (d Deck) Show() {
+	for _, card := range d {
+		v := strings.Title((card.Value).String())
+		s := strings.Title((card.Suit).String())
+		fmt.Printf("%s of %s\n", v, s)
+	}
+}
+
 // compare is function predicate that compares card elements.
 type compare func(c1, c2 *Card) bool
 
@@ -89,11 +105,6 @@ func bySuit(c1, c2 *Card) bool {
 }
 func byValue(c1, c2 *Card) bool {
 	return c1.Value < c2.Value
-}
-
-// Sort sorts the deck of cards.
-func (d *Deck) Sort() {
-	orderedBy(bySuit, byValue).sort(*d)
 }
 
 func (ms *cardSorter) sort(deck Deck) {
