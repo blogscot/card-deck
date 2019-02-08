@@ -4,9 +4,9 @@ package deck
 
 import "strconv"
 
-const _Value_name = "acetwothreefourfivesixseveneightninejackqueenking"
+const _Value_name = "AceTwoThreeFourFiveSixSevenEightNineTenJackQueenKing"
 
-var _Value_index = [...]uint8{0, 3, 6, 11, 15, 19, 22, 27, 32, 36, 40, 45, 49}
+var _Value_index = [...]uint8{0, 3, 6, 11, 15, 19, 22, 27, 32, 36, 39, 43, 48, 52}
 
 func (i Value) String() string {
 	if i < 0 || i >= Value(len(_Value_index)-1) {

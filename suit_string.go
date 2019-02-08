@@ -4,7 +4,7 @@ package deck
 
 import "strconv"
 
-const _Suit_name = "spadesdiamondsclubshearts"
+const _Suit_name = "SpadesDiamondsClubsHearts"
 
 var _Suit_index = [...]uint8{0, 6, 14, 19, 25}
 

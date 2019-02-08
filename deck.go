@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math/rand"
 	"sort"
-	"strings"
 	"time"
 )
 
@@ -13,33 +12,34 @@ import (
 type Suit int
 
 const (
-	spades Suit = iota
-	diamonds
-	clubs
-	hearts
+	Spades Suit = iota
+	Diamonds
+	Clubs
+	Hearts
 )
 
 // Value defines a card's value
 type Value int
 
 const (
-	ace Value = iota
-	two
-	three
-	four
-	five
-	six
-	seven
-	eight
-	nine
-	jack
-	queen
-	king
+	Ace Value = iota
+	Two
+	Three
+	Four
+	Five
+	Six
+	Seven
+	Eight
+	Nine
+	Ten
+	Jack
+	Queen
+	King
 )
 
 var (
-	suits  = []Suit{spades, diamonds, clubs, hearts}
-	values = []Value{ace, two, three, four, five, six, seven, eight, nine, jack, queen, king}
+	suits  = []Suit{Spades, Diamonds, Clubs, Hearts}
+	values = []Value{Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King}
 )
 
 func init() {
@@ -82,8 +82,8 @@ func (d *Deck) Sort() {
 // Show prints the deck of cards.
 func Show(cards []Card) {
 	for _, card := range cards {
-		v := strings.Title((card.Value).String())
-		s := strings.Title((card.Suit).String())
+		v := card.Value
+		s := card.Suit
 		fmt.Printf("%s of %s\n", v, s)
 	}
 }
