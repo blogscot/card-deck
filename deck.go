@@ -1,3 +1,4 @@
+// Package deck provides a means to create, shuffle and sort a deck of cards.
 package deck
 
 import (
@@ -66,20 +67,20 @@ func (d *Deck) Shuffle() {
 	return
 }
 
-// By is function predicate that compares card elements.
-type By func(c1, c2 *Card) bool
+// compare is function predicate that compares card elements.
+type compare func(c1, c2 *Card) bool
 
-// CardSorter holds a card deck and a list of comparison functions
+// cardSorter holds a card deck and a list of comparison functions
 // to sort the cards.
-type CardSorter struct {
-	deck Deck
-	by   []By
+type cardSorter struct {
+	deck    Deck
+	compare []compare
 }
 
-// OrderedBy builds a CardSorter containing a list of comparison functions.
-func OrderedBy(by ...By) *CardSorter {
-	return &CardSorter{
-		by: by,
+// orderedBy builds a CardSorter containing a list of comparison functions.
+func orderedBy(by ...compare) *cardSorter {
+	return &cardSorter{
+		compare: by,
 	}
 }
 
@@ -92,28 +93,28 @@ func byValue(c1, c2 *Card) bool {
 
 // Sort sorts the deck of cards.
 func (d *Deck) Sort() {
-	OrderedBy(bySuit, byValue).sort(*d)
+	orderedBy(bySuit, byValue).sort(*d)
 }
 
-func (ms *CardSorter) sort(deck Deck) {
+func (ms *cardSorter) sort(deck Deck) {
 	ms.deck = deck
 	sort.Sort(ms)
 }
 
-func (ms *CardSorter) Len() int {
+func (ms *cardSorter) Len() int {
 	return len(ms.deck)
 }
 
-func (ms *CardSorter) Swap(i, j int) {
+func (ms *cardSorter) Swap(i, j int) {
 	ms.deck[i], ms.deck[j] = ms.deck[j], ms.deck[i]
 }
 
-func (ms *CardSorter) Less(i, j int) bool {
+func (ms *cardSorter) Less(i, j int) bool {
 	p, q := &ms.deck[i], &ms.deck[j]
 	// Try all but the last comparison.
 	var k int
-	for k = 0; k < len(ms.by)-1; k++ {
-		compare := ms.by[k]
+	for k = 0; k < len(ms.compare)-1; k++ {
+		compare := ms.compare[k]
 		switch {
 		case compare(p, q):
 			// p < q, so we have a decision.
@@ -126,5 +127,5 @@ func (ms *CardSorter) Less(i, j int) bool {
 	}
 	// All comparisons to here said "equal", so just return whatever
 	// the final comparison reports.
-	return ms.by[k](p, q)
+	return ms.compare[k](p, q)
 }
