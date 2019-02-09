@@ -52,6 +52,10 @@ type Card struct {
 	Value Value
 }
 
+func (c Card) String() string {
+	return fmt.Sprintf("%s of %s", c.Value, c.Suit)
+}
+
 // Deck defines a deck of cards
 type Deck []Card
 
@@ -82,9 +86,7 @@ func (d *Deck) Sort() {
 // Show prints the deck of cards.
 func Show(cards []Card) {
 	for _, card := range cards {
-		v := card.Value
-		s := card.Suit
-		fmt.Printf("%s of %s\n", v, s)
+		fmt.Println(card)
 	}
 }
 
