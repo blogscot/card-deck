@@ -8,6 +8,9 @@ import (
 	"time"
 )
 
+//go:generate stringer -type=Suit
+//go:generate stringer -type=Value
+
 // Suit defines a card's suit
 type Suit int
 
